@@ -28,38 +28,5 @@ router.get('/characters/:id', async (req, res) => {
     }
 });
 
-// Crear un nuevo personaje (simulado, ya que no se puede crear en la API real)
-router.post('/characters', (req, res) => {
-    const newCharacter = {
-        id: Date.now(), // Usar una marca de tiempo como ID simulado
-        name: req.body.name,
-        status: req.body.status,
-        species: req.body.species,
-        gender: req.body.gender,
-        image: req.body.image // Agregar la imagen del personaje desde el cuerpo de la solicitud
-    };
-    // En un caso real, deberíamos guardar esto en una base de datos
-    res.status(201).json(newCharacter);
-});
-
-// Actualizar un personaje existente (simulado)
-router.put('/characters/:id', (req, res) => {
-    // En un caso real, deberíamos actualizar esto en una base de datos
-    const updatedCharacter = {
-        id: parseInt(req.params.id),
-        name: req.body.name,
-        status: req.body.status,
-        species: req.body.species,
-        gender: req.body.gender,
-        image: req.body.image // Actualizar la imagen del personaje si se proporciona
-    };
-    res.json(updatedCharacter);
-});
-
-// Eliminar un personaje (simulado)
-router.delete('/characters/:id', (req, res) => {
-    // En un caso real, deberíamos eliminar esto de una base de datos
-    res.json({ message: `El personaje con id ${req.params.id} ha sido eliminado (simulado)` });
-});
 
 module.exports = router;
