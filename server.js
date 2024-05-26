@@ -40,7 +40,8 @@ async function startServer() {
     });
 
     app.listen(port, () => {
-        console.log(`Servidor escuchando en http://localhost:${port}${server.graphqlPath}`);
+        console.log(`Servidor corriendo en http://localhost:${port}`);
+        console.log(`GraphQL endpoint: http://localhost:${port}${server.graphqlPath}`);
     });
 }
 
