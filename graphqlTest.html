@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rick and Morty GraphQL API</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .character {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px;
+            display: inline-block;
+            text-align: center;
+        }
+        .character img {
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Rick and Morty Characters (GraphQL API)</h1>
+    <div>
+        <button onclick="fetchCharacters()">Fetch Characters</button>
+    </div>
+    <div id="characters"></div>
+
+    <script>
+        async function fetchCharacters() {
+            const query = `
+            {
+                characters {
+                    id
+                    name
+                    status
+                    species
+                    gender
+                    image
+                }
+            }
+            `;
+            try {
+                const response = await fetch('http://localhost:3000/graphql', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ query })
+                });
+                const result = await response.json();
+                const characters = result.data.characters;
+                const charactersDiv = document.getElementById('characters');
+                charactersDiv.innerHTML = '';
+
+                characters.forEach(character => {
+                    const characterDiv = document.createElement('div');
+                    characterDiv.className = 'character';
+
+                    const img = document.createElement('img');
+                    img.src = character.image;
+                    img.alt = character.name;
+
+                    const name = document.createElement('h2');
+                    name.textContent = character.name;
+
+                    const status = document.createElement('p');
+                    status.textContent = `Status: ${character.status}`;
+
+                    const species = document.createElement('p');
+                    species.textContent = `Species: ${character.species}`;
+
+                    const gender = document.createElement('p');
+                    gender.textContent = `Gender: ${character.gender}`;
+
+                    characterDiv.appendChild(img);
+                    characterDiv.appendChild(name);
+                    characterDiv.appendChild(status);
+                    characterDiv.appendChild(species);
+                    characterDiv.appendChild(gender);
+
+                    charactersDiv.appendChild(characterDiv);
+                });
+            } catch (error) {
+                console.error('Error fetching characters:', error);
+            }
+        }
+    </script>
+</body>
+</html>
