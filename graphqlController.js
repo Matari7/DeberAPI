@@ -7,68 +7,49 @@ const typeDefs = gql`
   type Character {
     id: ID!
     name: String!
-    status: String
-    species: String
-    gender: String
-    image: String
+    status: String!
+    species: String!
+    type: String
+    gender: String!
+    origin: Origin!
+    location: Location!
+    image: String!
+    created: String!
+  }
+
+  type Origin {
+    name: String!
+    url: String!
+  }
+
+  type Location {
+    name: String!
+    url: String!
   }
 
   type Query {
-    characters(page: Int): [Character]
+    characters: [Character]
     character(id: ID!): Character
   }
 `;
 
 // Resolvers para las consultas
 const resolvers = {
-  Query: {
-    characters: async (_, { page = 1 }) => {
-      const query = `
-        query ($page: Int) {
-          characters(page: $page) {
-            results {
-              id
-              name
-              status
-              species
-              gender
-              image
-            }
-          }
-        }
-      `;
-      try {
-        const data = await fetchGraphQL(query, { page });
-        return data.characters.results;
-      } catch (error) {
-        throw new Error('Error fetching characters');
+    Query: {
+      characters: async () => {
+        // Aquí realizarías una llamada a la API de Rick and Morty para obtener los personajes
+        // Por ahora, simularemos algunos datos de ejemplo
+        return [
+          { id: '1', name: 'Rick Sanchez', status: 'Alive', species: 'Human', gender: 'Male' },
+          { id: '2', name: 'Morty Smith', status: 'Alive', species: 'Human', gender: 'Male' }
+        ];
+      },
+      character: async (_, { id }) => {
+        // Aquí también realizarías una llamada a la API de Rick and Morty para obtener un personaje específico
+        // Por ahora, simularemos datos de ejemplo
+        return { id, name: 'Rick Sanchez', status: 'Alive', species: 'Human', gender: 'Male' };
       }
-    },
-    character: async (_, { id }) => {
-      const query = `
-        query ($id: ID!) {
-          character(id: $id) {
-            id
-            name
-            status
-            species
-            gender
-            image
-          }
-        }
-      `;
-      try {
-        const data = await fetchGraphQL(query, { id });
-        return data.character;
-      } catch (error) {
-        if (error.response && error.response.status === 404) {
-          throw new Error('Character not found');
-        } else {
-          throw new Error('Error fetching character');
-        }
-      }
-    },
-  },
-};
+    }
+  };
 
 module.exports = { typeDefs, resolvers };
