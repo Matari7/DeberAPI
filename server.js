@@ -6,7 +6,7 @@ const { typeDefs, resolvers } = require('./graphqlController');
 const restController = require('./restController');
 
 const app = express();
-const port = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 
