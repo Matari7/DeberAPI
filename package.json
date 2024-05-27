@@ -6,6 +6,9 @@
   "scripts": {
     "start": "node server.js"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
     "apollo-server-express": "^3.13.0",
     "axios": "^1.7.2",
