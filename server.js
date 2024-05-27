@@ -39,9 +39,9 @@ async function startServer() {
         res.status(404).send('La ruta no fue encontrada');
     });
 
-    app.listen(port, () => {
-        console.log(`Servidor corriendo en http://localhost:${port}`);
-        console.log(`GraphQL endpoint: http://localhost:${port}${server.graphqlPath}`);
+    app.listen(PORT, () => {
+        console.log(`Servidor corriendo en http://localhost:${PORT}`);
+        console.log(`GraphQL endpoint: http://localhost:${PORT}${server.graphqlPath}`);
     });
 }
 
