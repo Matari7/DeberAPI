@@ -1,4 +1,11 @@
 {
+  "name": "login",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
     "apollo-server-express": "^3.13.0",
     "axios": "^1.7.2",
