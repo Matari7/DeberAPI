@@ -10,6 +10,9 @@ const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 
+// Middleware para servir archivos estáticos
+app.use(express.static(path.join(__dirname, 'public')));
+
 async function startServer() {
     // Configurar Apollo Server
     const server = new ApolloServer({ typeDefs, resolvers });
