@@ -27,8 +27,8 @@ async function startServer() {
     });
 
     // Ruta para servir el archivo graphql.html
-    app.get('/graphqlTest', (req, res) => {
-        res.sendFile(path.join(__dirname, 'graphqlTest.html'));
+    app.get('/graphql', (req, res) => {
+        res.sendFile(path.join(__dirname, 'graphql.html'));
     });
 
     // Usar el enrutador de restController

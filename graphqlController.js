@@ -33,6 +33,19 @@ const typeDefs = gql`
   }
 `;
 
+// Función para hacer peticiones a la API GraphQL
+const fetchGraphQL = async (query, variables = {}) => {
+    const response = await fetch(API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ query, variables }),
+    });
+    const data = await response.json();
+    return data.data;
+  };
+
 // Resolvers para las consultas
 const resolvers = {
     Query: {
