@@ -8,5 +8,8 @@
   },
   "devDependencies": {
     "@apollo/client": "^3.10.4"
+  },
+  "engines": {
+    "node": "22.x"
   }
 }
