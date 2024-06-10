@@ -27,6 +27,16 @@ router.get('/characters/:id', async (req, res) => {
         }
     }
 });
+router.get('/characters/db', async (req, res) => {
+    try {
+      const query = `SELECT * FROM characters`;
+      const result = await pool.query(query);
+      res.json(result.rows);
+    } catch (error) {
+      res.status(500).send('Error al obtener los personajes de la base de datos');
+    }
+  });
+  
 
 
 module.exports = router;

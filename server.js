@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const { typeDefs, resolvers } = require('./graphqlController');
 const restController = require('./restController');
-
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -32,6 +31,9 @@ async function startServer() {
         res.sendFile(path.join(__dirname, 'graphql.html'));
     });
 
+
+
+
     // Usar el enrutador de restController
     app.use('/api', restController);
 
@@ -45,6 +47,7 @@ async function startServer() {
         console.log(`GraphQL endpoint: ${PORT}${server.graphqlPath}`);
     });
 }
+
 
 startServer().catch((error) => {
     console.error('Error starting the server:', error);
